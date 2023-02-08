@@ -1,0 +1,59 @@
+## for vendor table 
+
+CREATE TABLE `vendor` (
+  `code` int NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `bin` varchar(10) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `pass` varchar(40) NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `profilepic` varchar(300) NOT NULL,
+  `contactno` varchar(15) NOT NULL,
+  `response` float NOT NULL,
+  PRIMARY KEY (`code`),
+  UNIQUE KEY `code` (`code`),
+  UNIQUE KEY `bin` (`bin`),
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `contactno` (`contactno`)
+);
+
+## for client table
+
+CREATE TABLE `client` (
+  `cnid` varchar(15) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `phoneno` varchar(15) NOT NULL,
+  `pass` varchar(40) NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `profilepic` varchar(300) NOT NULL,
+  PRIMARY KEY (`cnid`),
+  UNIQUE KEY `cnid` (`cnid`),
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `phoneno` (`phoneno`)
+);
+
+## for event table
+
+CREATE TABLE `event` (
+  `eid` int NOT NULL,
+  `name` varchar(70) NOT NULL,
+  `code` int NOT NULL,
+  `section` varchar(30) NOT NULL,
+  `askingprice` float NOT NULL,
+  FOREIGN KEY (`code`) REFERENCES `vendor` (`code`)
+);
+
+## for adds table 
+
+CREATE TABLE `adds` (
+  `eid` int NOT NULL,
+  `cnid` varchar(15) DEFAULT NULL,
+  `name` varchar(70) NOT NULL,
+  `location` varchar(200) NOT NULL,
+  `sdate` varchar(15) NOT NULL,
+  `edate` varchar(15) NOT NULL,
+  `pay` float NOT NULL,
+  `status` varchar(10) DEFAULT NULL,
+  FOREIGN KEY (`cnid`) REFERENCES `client` (`cnid`) ON DELETE SET NULL
+);
